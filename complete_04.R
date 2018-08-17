@@ -142,11 +142,19 @@ for(i in 1:nrow(test_dat))
   }
   if("경상자수" %in% col_names[is.na(test_dat[i,])])
   {
-    if("중상자수" %in% col_names[is.na(test_dat[i,])] == 0)
+    if("사상자수" %in% col_names[is.na(test_dat[i,])] == 0)
     {
-      rf_model <- randomForest::randomForest(경상자수~중상자수+사망자수+부상신고자수, dat)
-      pred <- predict(rf_model, newdata = test_dat[i,])
-      test_dat[i,"경상자수"] = pred
+      if("중상자수" %in% col_names[is.na(test_dat[i,])] == 0)
+      {
+        rf_model <- lm(경상자수~중상자수+사망자수+부상신고자수+사상자수, dat)
+        pred <- predict(rf_model, newdata = test_dat[i,])
+        test_dat[i,"경상자수"] = pred
+      }else
+      {
+        rf_model <- randomForest::randomForest(경상자수~사망자수+부상신고자수+사상자수, dat)
+        pred <- predict(rf_model, newdata = test_dat[i,])
+        test_dat[i,"경상자수"] = pred
+      }
     }else
     {
       rf_model <- randomForest::randomForest(경상자수~사망자수+부상신고자수, dat)
@@ -156,9 +164,17 @@ for(i in 1:nrow(test_dat))
   }
   if("중상자수" %in% col_names[is.na(test_dat[i,])])
   {
-    rf_model <- randomForest::randomForest(중상자수~사망자수+부상신고자수+경상자수, dat)
-    pred <- predict(rf_model, newdata = test_dat[i,])
-    test_dat[i,"중상자수"] = pred
+    if("사상자수" %in% col_names[is.na(test_dat[i,])] == 0)
+    {
+      rf_model <- lm(중상자수~사상자수+사망자수+부상신고자수+경상자수, dat)
+      pred <- predict(rf_model, newdata = test_dat[i,])
+      test_dat[i,"중상자수"] = pred
+    }else
+    {
+      rf_model <- randomForest::randomForest(중상자수~사망자수+부상신고자수+경상자수, dat)
+      pred <- predict(rf_model, newdata = test_dat[i,])
+      test_dat[i,"중상자수"] = pred
+    }
   }
   if("사상자수" %in% col_names[is.na(test_dat[i,])])
   {
