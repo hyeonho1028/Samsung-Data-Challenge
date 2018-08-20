@@ -1,0 +1,40 @@
+# samsung data challenge visualization
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from os import chdir
+chdir('C:/workspace/Github/Samsung_Data_Challenge/final')
+
+
+train = pd.read_csv("Train_교통사망사고정보(12.1~17.6).csv", engine='python')
+
+import matplotlib.font_manager
+[f.name for f in matplotlib.font_manager.fontManager.ttflist if 'Mal' in f.name] 
+from matplotlib import font_manager, rc
+font_name = font_manager.FontProperties(fname='c:/windows/fonts/malgun.ttf').get_name()
+rc('font', family=font_name)
+[(f.name, f.fname) for f in matplotlib.font_manager.fontManager.ttflist if 'Mal' in f.name] 
+plt.rcParams['axes.unicode_minus'] = False
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.countplot(x='발생년', data=train)
+
+sns.countplot(x='주야', data=train)
+sns.countplot(x='요일', data=train)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
