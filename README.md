@@ -8,9 +8,9 @@
 2. compitition의 특성상 모든 컬럼에 대한 예측이 필요
 3. 
 #### 2 데이터 전처리
-1. 많은 범주를 가진 컬럼에 대한 처리 필요성
-2. 
-3. 
+1. 많은 범주를 가진 컬럼에 대한 처리 필요성(범주 통합 or labeling)
+2. missing value
+3. outlier vlaue
 4. 
 #### 3 데이터 모델링
 1. regression
